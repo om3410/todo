@@ -1,0 +1,175 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Welcome Back</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+  </head>
+  <body class="login-page" style="overflow-y: scroll">
+    <!-- Floating background shapes -->
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Main login container -->
+    <div class="signup-login" style="overflow-y: scroll">
+      <div class="signup-box" style="overflow-y: scroll">
+        <!-- Header -->
+        <div class="heading">Welcome Back</div>
+        <div class="line"></div>
+
+        <!-- Display Django messages -->
+        {% if messages %}
+        <div style="margin-bottom: 20px">
+          {% for message in messages %}
+          <div
+            style="padding: 10px; margin: 5px 0; border-radius: 5px; text-align: center;
+                         {% if message.tags == 'error' %}background-color: #ffebee; color: #c62828; border: 1px solid #ef5350;{% endif %}
+                         {% if message.tags == 'success' %}background-color: #e8f5e8; color: #2e7d32; border: 1px solid #4caf50;{% endif %}"
+          >
+            {{ message }}
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Login Form -->
+        <form method="post" action="{% url 'login' %}">
+          {% csrf_token %}
+
+          <!-- Username Field -->
+          <div class="field">
+            <label><b>Username</b></label>
+            <input
+              type="text"
+              class="inp"
+              name="username"
+              placeholder="Enter your username"
+              required
+            />
+          </div>
+          <br />
+
+          <!-- Password Field -->
+          <div class="field">
+            <label><b>Password</b></label>
+            <input
+              type="password"
+              class="inp"
+              name="password"
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+          <br />
+
+          <!-- Submit Button -->
+          <button type="submit" class="submit-button">Sign In</button>
+
+          <!-- Signup Link -->
+          <div class="field" style="text-align: center; margin-top: 15px">
+            <span
+              >Don't have an account?
+              <a href="{% url 'signup' %}">Create Account</a>
+            </span>
+          </div>
+        </form>
+
+        <!-- Forgot Password Section -->
+        <div style="text-align: center; margin-top: 20px">
+          <p><a href="#" onclick="return false;">Forgot Password?</a></p>
+        </div>
+
+        <!-- Social Login Options -->
+        <div style="text-align: center; margin-top: 20px">
+          <p>Or continue with</p>
+          <div
+            style="
+              display: flex;
+              justify-content: center;
+              gap: 15px;
+              margin-top: 10px;
+            "
+          >
+            <a
+              href="#"
+              onclick="return false;"
+              style="
+                text-decoration: none;
+                padding: 8px 12px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+              "
+              >🌐 Google</a
+            >
+            <a
+              href="#"
+              onclick="return false;"
+              style="
+                text-decoration: none;
+                padding: 8px 12px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+              "
+              >📘 Facebook</a
+            >
+            <a
+              href="#"
+              onclick="return false;"
+              style="
+                text-decoration: none;
+                padding: 8px 12px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+              "
+              >🐦 Twitter</a
+            >
+          </div>
+        </div>
+
+        <!-- Additional Information -->
+        <div
+          style="
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            color: #666;
+          "
+        >
+          <p>
+            By signing in, you agree to our
+            <a href="#" onclick="return false;">Terms of Service</a>
+            and
+            <a href="#" onclick="return false;">Privacy Policy</a>
+          </p>
+        </div>
+
+        <!-- Demo Credentials (Optional - Remove in production) -->
+        <div
+          style="
+            background-color: #f0f8ff;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+            border: 1px solid #b3d9ff;
+          "
+        >
+          <h4 style="margin: 0 0 10px 0; color: #0066cc">Demo Credentials:</h4>
+          <p style="margin: 5px 0; font-size: 14px">Username: demo</p>
+          <p style="margin: 5px 0; font-size: 14px">Password: demo123</p>
+          <small style="color: #666"
+            >Use these credentials to test the login functionality</small
+          >
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
