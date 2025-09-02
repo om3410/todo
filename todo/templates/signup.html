@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup - Join Us Today</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+  </head>
+  <body class="signup-page" style="overflow-y: scroll; height: 100vh">
+    <!-- Floating background shapes -->
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Main signup container -->
+    <div class="signup-login">
+      <div class="signup-box" style="max-height: 90vh; overflow-y: auto">
+        <!-- Header with animated icon -->
+        <div class="heading">Create Account</div>
+        <div class="line"></div>
+
+        <!-- Signup Form -->
+        <form method="post" action="/signup/">
+          {% csrf_token %}
+          <!-- Username Field -->
+          <div class="field">
+            <label><b>Username</b></label>
+            <input
+              type="text"
+              class="inp"
+              name="username"
+              placeholder="Choose a unique username"
+              required
+            />
+          </div>
+          <br />
+
+          <!-- Email Field -->
+          <div class="field">
+            <label><b>Email Address</b></label>
+            <input
+              type="email"
+              class="inp"
+              name="email"
+              placeholder="Enter your email address"
+              required
+            />
+          </div>
+
+          <!-- Password Field -->
+          <div class="field">
+            <label><b>Password</b></label>
+            <input
+              type="password"
+              class="inp"
+              name="password"
+              placeholder="Create a strong password"
+              required
+            />
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="submit-button">Create Account</button>
+
+          <!-- Login Link -->
+          <div class="field">
+            <span
+              >Already have an account?
+              <a href="{% url 'login' %}">Sign In</a>
+            </span>
+          </div>
+        </form>
+
+        <!-- Social Signup Options -->
+        <div>
+          <p>Or continue with</p>
+
+          <div>
+            <a href="#">🌐 Google</a>
+            <a href="#">📘 Facebook</a>
+            <a href="#">🐦 Twitter</a>
+          </div>
+        </div>
+
+        <!-- Additional Links -->
+        <div>
+          <p>
+            By signing up, you agree to our
+            <a href="#" onclick="return false;">Terms of Service</a>
+            and
+            <a href="#" onclick="return false;">Privacy Policy</a>
+          </p>
+        </div>
+
+        <!-- Display Django messages -->
+        {% if messages %}
+        <div style="margin-top: 20px">
+          {% for message in messages %}
+          <div
+            style="padding: 10px; margin: 5px 0; border-radius: 5px; 
+                         {% if message.tags == 'error' %}background-color: #ffebee; color: #c62828; border: 1px solid #ef5350;{% endif %}
+                         {% if message.tags == 'success' %}background-color: #e8f5e8; color: #2e7d32; border: 1px solid #4caf50;{% endif %}"
+          >
+            {{ message }}
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </body>
+</html>
